@@ -50,18 +50,30 @@
    */
   const preloader = document.querySelector('#preloader');
   if (preloader) {
+    console.log('Preloader found:', preloader);
+
     window.addEventListener('load', () => {
       console.log('Window loaded, removing preloader');
-      preloader.parentNode.removeChild(preloader);
+      if (preloader.parentNode) {
+        preloader.parentNode.removeChild(preloader);
+        console.log('Preloader removed');
+      } else {
+        console.log('Preloader parent not found');
+      }
     });
 
     // Fallback to remove preloader after 5 seconds
     setTimeout(() => {
-      if (preloader) {
+      if (preloader && preloader.parentNode) {
         console.log('Fallback: Removing preloader after 5 seconds');
         preloader.parentNode.removeChild(preloader);
+        console.log('Preloader removed by fallback');
+      } else {
+        console.log('Preloader or its parent not found in fallback');
       }
     }, 5000);
+  } else {
+    console.log('Preloader not found');
   }
 
   /**
@@ -104,7 +116,7 @@
   const selectTyped = document.querySelector('.typed');
   if (selectTyped) {
     let typed_strings = selectTyped.getAttribute('data-typed-items');
-    typed_strings = typed_strings.split(',');
+    typed_strings = typed_strings.split(',').map(item => item.trim());
     new Typed('.typed', {
       strings: typed_strings,
       loop: true,
