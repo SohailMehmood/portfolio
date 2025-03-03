@@ -718,6 +718,25 @@ section,
   background-color: var(--accent-color);
 }
 
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.skill-item img {
+  max-width: 100px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.skill-item img:hover {
+  transform: scale(1.1);
+}
+
 /*--------------------------------------------------------------
 # Resume Section
 --------------------------------------------------------------*/
